@@ -6,14 +6,8 @@ export default function ExpensesList({expenses}) {
     function renderExpense(itemData) {
         const item = itemData.item
 
-        const expenseProps = {
-            description: item.description,
-            amount: item.amount,
-            date: item.date
-        }
-
         return (
-            <ExpenseItem {...expenseProps} />
+            <ExpenseItem {...item} />
         )
     }
 
