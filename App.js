@@ -2,9 +2,12 @@ import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {Ionicons} from '@expo/vector-icons'
+
 import AllExpenses from './screens/AllExpenses'
 import RecentExpenses from './screens/RecentExpenses'
 import ManageExpenses from './screens/ManageExpenses'
+
 import {GlobalStyles} from './constants/styles'
 
 const Stack = createNativeStackNavigator()
@@ -23,12 +26,20 @@ function BottomTabsNavigator() {
 			<BottomTabs.Screen 
 				name='recent-expenses' 
 				component={RecentExpenses} 
-					
+				options={{
+					title:'Recent Expenses',
+					tabBarLabel: 'Recent',
+					tabBarIcon: ({color, size}) => <Ionicons name='hourglass' color={color} size={size} />
+				}}
 			/>
 			<BottomTabs.Screen 
 				name='all-expenses' 
 				component={AllExpenses}
-				
+				options={{
+					title:'All Expenses',
+					tabBarLabel: 'All Expenses',
+					tabBarIcon: ({color, size}) => <Ionicons name='calendar' color={color} size={size} />
+				}}
 			/>
 		</BottomTabs.Navigator>
 	)
