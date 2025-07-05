@@ -13,7 +13,7 @@ function BottomTabsNavigator() {
 	return (
 		<BottomTabs.Navigator>
 			<BottomTabs.Screen name='recent-expenses' component={RecentExpenses} />
-			<BottomTabs.Screen name='manage-expenses' component={ManageExpenses} />
+			<BottomTabs.Screen name='all-expenses' component={AllExpenses}/>
 		</BottomTabs.Navigator>
 	)
 }
@@ -24,8 +24,14 @@ export default function App() {
 		<StatusBar style="auto" />
 		<NavigationContainer>
 			<Stack.Navigator>
-				<Stack.Screen name='all-expenses' component={AllExpenses} options={{title: 'All Expenses'}} />
-				<Stack.Screen name='bottom-tabs' component={BottomTabsNavigator} />
+				<Stack.Screen 
+					name='bottom-tabs' 
+					component={BottomTabsNavigator} 
+					options={{
+						headerShown: false
+					}}
+				/>
+				<Stack.Screen name='manage-expenses' component={ManageExpenses} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	</>
