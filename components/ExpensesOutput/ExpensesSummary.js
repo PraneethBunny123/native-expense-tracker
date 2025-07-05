@@ -2,7 +2,7 @@ import { Text, View } from "react-native";
 
 export default function ExpensesSummary({expenses, period}) {
     const expenseSum = expenses.reduce((sum, expense) => {
-        return sum + expense
+        return sum + expense.amount
     }, 0)
 
     return (

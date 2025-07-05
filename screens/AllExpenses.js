@@ -3,6 +3,6 @@ import ExpensesOutput from "../components/ExpensesOutput/ExpensesOutput";
 
 export default function AllExpenses() {
     return (
-        <ExpensesOutput />
+        <ExpensesOutput period="5 days" />
     )
 }
