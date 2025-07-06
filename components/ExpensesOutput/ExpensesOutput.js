@@ -25,38 +25,38 @@ const DUMMY_EXPENSES = [
     },
     {
         id: 'e4',
-        description: 'A pair of shoes',
-        amount: 79.99,
+        description: 'Ear buds',
+        amount: 199.99,
         date: new Date('2025-07-05')
     },
     {
         id: 'e5',
-        description: 'Chocolates',
-        amount: 15.99,
+        description: 'Watch',
+        amount: 75.99,
         date: new Date('2025-07-05')
     },
     {
         id: 'e6',
-        description: 'Perfume',
-        amount: 39.99,
+        description: 'Slides',
+        amount: 49.99,
         date: new Date('2025-07-03')
     },
     {
         id: 'e7',
-        description: 'A pair of shoes',
-        amount: 79.99,
+        description: 'Car',
+        amount: 19759.99,
         date: new Date('2025-07-05')
     },
     {
         id: 'e8',
-        description: 'Chocolates',
-        amount: 15.99,
+        description: 'Deodrant',
+        amount: 11.99,
         date: new Date('2025-07-05')
     },
     {
         id: 'e9',
-        description: 'Perfume',
-        amount: 39.99,
+        description: 'Knife',
+        amount: 14.99,
         date: new Date('2025-07-03')
     }
 ]
