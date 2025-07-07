@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useReducer } from "react";
 
 const ExpensesContext = useContext({
     expenses: [],
@@ -7,8 +7,18 @@ const ExpensesContext = useContext({
     updateExpense: (id, {description, amount, date}) => {}
 })
 
+function expenseReducer(state, action) {
+    switch(action.type) {
+        case 'ADD':
+        case 'UPDATE':
+        case 'DELETE':
+        default: 
+            return state
+    }
+}
+ 
 export default function ExpensesContextProvider({children}) {
-    
+    const [expenseState, dispatch] = useReducer(expenseReducer)
 
     return <ExpensesContext.Provider>{children}</ExpensesContext.Provider>
 }
