@@ -70,6 +70,9 @@ function expenseReducer(state, action) {
             const id = new Date().toString() + Math.random().toString()
             return [{...action.payload, id: id}, ...state]
         case 'UPDATE':
+            const updatableExpenseIndex = state.findIndex(expense => expense.id === payload.action.id)
+            const updatableExpense = state[updatableExpenseIndex]
+            const updatedExpense = {...updatableExpense, ...action.payload.data}
         case 'DELETE':
         default: 
             return state
@@ -88,7 +91,7 @@ export default function ExpensesContextProvider({children}) {
     }
 
     function updateExpense(id) {
-        dispatch({type: 'UPDATE', payload: expenseData})
+        dispatch({type: 'UPDATE', payload: {id: id, data: expenseData}})
     }
 
     return <ExpensesContext.Provider>{children}</ExpensesContext.Provider>
