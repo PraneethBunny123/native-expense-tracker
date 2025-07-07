@@ -1,4 +1,4 @@
-import { useContext, useReducer } from "react";
+import { createContext, useReducer } from "react";
 
 const DUMMY_EXPENSES = [
     {
@@ -57,7 +57,7 @@ const DUMMY_EXPENSES = [
     }
 ]
 
-const ExpensesContext = useContext({
+const ExpensesContext = createContext({
     expenses: [],
     addExpense: ({description, amount, date}) => {},
     deleteExpense: (id) => {},
