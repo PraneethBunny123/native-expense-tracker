@@ -10,6 +10,8 @@ const ExpensesContext = useContext({
 function expenseReducer(state, action) {
     switch(action.type) {
         case 'ADD':
+            const id = new Date().toString() + Math.random().toString()
+            return [{...action.payload, id: id}, ...state]
         case 'UPDATE':
         case 'DELETE':
         default: 
