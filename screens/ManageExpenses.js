@@ -15,22 +15,22 @@ export default function ManageExpenses({route, navigation}) {
     }, [navigation, isEditing])
     
     function handleDeleteExpense() {
-
+        navigation.goBack()
     }
 
     function handleCancelButton() {
-
+        navigation.goBack()
     }
 
     function handleConfirmButton() {
-
+        navigation.goBack()
     }
 
     return (
         <View style={styles.container}>
             <View style={styles.buttons}>
-                <Button mode='flat' onPress={handleCancelButton}>Cancel</Button>
-                <Button onPress={handleConfirmButton}>{isEditing ? 'Update' : 'Add'}</Button>
+                <Button style={styles.button} mode='flat' onPress={handleCancelButton}>Cancel</Button>
+                <Button style={styles.button} onPress={handleConfirmButton}>{isEditing ? 'Update' : 'Add'}</Button>
             </View>
             {isEditing && (
                 <View style={styles.deleteContainer}>
@@ -56,6 +56,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    button: {
+        minWidth: 120,
+        marginHorizontal: 8
     },
     deleteContainer: {
         marginTop: 16,
