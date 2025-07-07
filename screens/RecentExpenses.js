@@ -4,9 +4,9 @@ import { useContext } from "react";
 import { ExpensesContext } from "../store/expenses-context";
 
 export default function RecentExpenses() {
-    const {expenses} = useContext(ExpensesContext)
+    const expensesCtx = useContext(ExpensesContext)
 
     return (
-        <ExpensesOutput expenses={expenses} period='last 7 days' />
+        <ExpensesOutput expenses={expensesCtx.expenses} period='last 7 days' />
     )
 }
