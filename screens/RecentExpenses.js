@@ -1,8 +1,12 @@
 import { Text } from "react-native";
 import ExpensesOutput from "../components/ExpensesOutput/ExpensesOutput";
+import { useContext } from "react";
+import { ExpensesContext } from "../store/expenses-context";
 
 export default function RecentExpenses() {
+    const {expenses} = useContext(ExpensesContext)
+
     return (
-        <ExpensesOutput period='last 7 days' />
+        <ExpensesOutput expenses={expenses} period='last 7 days' />
     )
 }
