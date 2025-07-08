@@ -27,7 +27,7 @@ export default function ExpenseForm() {
             <Input 
                 label='Description'
                 textInputConfig={{
-                    
+                    multiline: true
                 }}
             />
         </View>
