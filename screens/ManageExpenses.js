@@ -2,7 +2,6 @@ import { useContext, useLayoutEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import IconButton from "../components/UI/IconButton";
 import {GlobalStyles} from '../constants/styles'
-import Button from "../components/UI/Button";
 import { ExpensesContext } from "../store/expenses-context";
 import ExpenseForm from "../components/ManageExpense/ExpenseForm";
 
@@ -11,6 +10,8 @@ export default function ManageExpenses({route, navigation}) {
     const isEditing = !!expenseId
 
     const expensesCtx = useContext(ExpensesContext)
+
+    const selectedExpense = expensesCtx.expenses.find(expense => expense.id === expenseId)
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -42,6 +43,7 @@ export default function ManageExpenses({route, navigation}) {
                 handleCancelButton={handleCancelButton} 
                 submitButtonLabel={isEditing ? 'Update' : 'Add'}
                 onSubmit={handleConfirmButton}
+                defaultValues={selectedExpense}
             />
             {isEditing && (
                 <View style={styles.deleteContainer}>
