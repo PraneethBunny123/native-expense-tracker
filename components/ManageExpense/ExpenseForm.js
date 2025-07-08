@@ -41,7 +41,14 @@ export default function ExpenseForm({handleCancelButton, submitButtonLabel, onSu
         const descriptionIsValid = expenseData.description.trim().length > 0
 
         if(!amountIsValid || !dateIsValid || !descriptionIsValid) {
-            Alert.alert('Invalid input, Please check your input values!')
+            // Alert.alert('Invalid input, Please check your input values!')
+            setInputValues(prevState => (
+                {
+                    amount: {value: prevState.amount.value, isValid: amountIsValid},
+                    date: {value: prevState.date.value, isValid: dateIsValid},
+                    description: {value: prevState.description.value, isValid: descriptionIsValid}
+                }
+            ))
             return;
         }
 
