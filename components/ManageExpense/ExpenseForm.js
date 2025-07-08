@@ -6,22 +6,34 @@ import getFormattedDate from "../../util/date";
 
 export default function ExpenseForm({handleCancelButton, submitButtonLabel, onSubmit, defaultValues}) {
     const [inputValues, setInputValues] = useState({
-        amount: defaultValues ? defaultValues.amount.toString() : '',
-        date: defaultValues ? getFormattedDate(defaultValues.date) : '',
-        description: defaultValues ? defaultValues.description : ''
+        amount: {
+            value: defaultValues ? defaultValues.amount.toString() : '',
+            isValid: !!defaultValues
+        },
+        date: {
+            value: defaultValues ? getFormattedDate(defaultValues.date) : '',
+            isValid: !!defaultValues
+        },
+        description: {
+            value: defaultValues ? defaultValues.description : '',
+            isValid: !!defaultValues
+        }
     })
 
     function handleInputChange(inputLabel, enteredValue) {
         setInputValues(prevState => (
-            {...prevState, [inputLabel]: enteredValue}
+            {
+                ...prevState, 
+                [inputLabel]: {value: enteredValue, isValid: true}
+            }
         ))
     }
 
     function handleFormSubmit() {
         const expenseData = {
-            amount: +inputValues.amount,
-            date: new Date(inputValues.date),
-            description: inputValues.description
+            amount: +inputValues.amount.value,
+            date: new Date(inputValues.date.value),
+            description: inputValues.description.value
         }
 
         const amountIsValid = !isNaN(expenseData.amount) && expenseData.amount > 0
@@ -46,7 +58,7 @@ export default function ExpenseForm({handleCancelButton, submitButtonLabel, onSu
                     textInputConfig={{
                         keyboardType: 'decimal-pad',
                         onChangeText: handleInputChange.bind(this, 'amount'),
-                        value: inputValues.amount
+                        value: inputValues.amount.value
                     }}
                 />
                 <Input 
@@ -56,7 +68,7 @@ export default function ExpenseForm({handleCancelButton, submitButtonLabel, onSu
                         placeholder: 'YYYY-MM-DD',
                         maxLength: 10,
                         onChangeText: (e) => handleInputChange('date', e),
-                        value: inputValues.date
+                        value: inputValues.date.value
                     }}
                 />
             </View>
@@ -65,7 +77,7 @@ export default function ExpenseForm({handleCancelButton, submitButtonLabel, onSu
                 textInputConfig={{
                     multiline: true,
                     onChangeText: (e) => handleInputChange('description', e),
-                    value: inputValues.description
+                    value: inputValues.description.value
                 }}
             />
             <View style={styles.buttons}>
