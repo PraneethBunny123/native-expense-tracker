@@ -11,6 +11,7 @@ export default function ExpenseForm() {
         <View>
             <View style={styles.inputRow} >
                 <Input 
+                    style={styles.rowInput}
                     label='Amount'
                     textInputConfig={{
                         keyboardType: 'decimal-pad',
@@ -18,6 +19,7 @@ export default function ExpenseForm() {
                     }}
                 />
                 <Input 
+                    style={styles.rowInput}
                     label='Date'
                     textInputConfig={{
                         placeholder: 'YYYY-MM-DD',
@@ -40,5 +42,8 @@ const styles = StyleSheet.create({
     inputRow: {
         flexDirection: 'row',
         justifyContent: 'space-between'
+    },
+    rowInput: {
+        flex: 1
     }
 })
