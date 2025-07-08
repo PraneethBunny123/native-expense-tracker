@@ -8,15 +8,15 @@ export default function ExpenseForm({handleCancelButton, submitButtonLabel, onSu
     const [inputValues, setInputValues] = useState({
         amount: {
             value: defaultValues ? defaultValues.amount.toString() : '',
-            isValid: !!defaultValues
+            isValid: true
         },
         date: {
             value: defaultValues ? getFormattedDate(defaultValues.date) : '',
-            isValid: !!defaultValues
+            isValid: true
         },
         description: {
             value: defaultValues ? defaultValues.description : '',
-            isValid: !!defaultValues
+            isValid: true
         }
     })
 
@@ -55,6 +55,9 @@ export default function ExpenseForm({handleCancelButton, submitButtonLabel, onSu
         onSubmit(expenseData)
     }
 
+    const formIsValid = !inputValues.amount.isValid || !inputValues.date.isValid || !inputValues.description.isValid
+
+
     return (
         <View style={styles.form}>
             <Text style={styles.title}>Your Expense</Text>
@@ -87,6 +90,7 @@ export default function ExpenseForm({handleCancelButton, submitButtonLabel, onSu
                     value: inputValues.description.value
                 }}
             />
+            {formIsValid && <Text>Invalid input, Please check your input values!</Text>}
             <View style={styles.buttons}>
                 <Button style={styles.button} mode='flat' onPress={handleCancelButton}>Cancel</Button>
                 <Button style={styles.button} onPress={handleFormSubmit}>{submitButtonLabel}</Button>
