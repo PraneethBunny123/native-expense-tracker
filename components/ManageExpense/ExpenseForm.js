@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import Input from "./Input";
 
 export default function ExpenseForm() {
@@ -8,7 +8,8 @@ export default function ExpenseForm() {
     }
 
     return (
-        <View>
+        <View style={styles.form}>
+            <Text style={styles.title}>Your Expense</Text>
             <View style={styles.inputRow} >
                 <Input 
                     style={styles.rowInput}
@@ -39,6 +40,16 @@ export default function ExpenseForm() {
 }
 
 const styles = StyleSheet.create({
+    form: {
+        marginTop: 40
+    },
+    title: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: 'white',
+        marginVertical: 24,
+        textAlign: 'center'
+    },
     inputRow: {
         flexDirection: 'row',
         justifyContent: 'space-between'
