@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import Input from "./Input";
 
 export default function ExpenseForm() {
@@ -9,21 +9,23 @@ export default function ExpenseForm() {
 
     return (
         <View>
-            <Input 
-                label='Amount'
-                textInputConfig={{
-                    keyboardType: 'decimal-pad',
-                    onchangeText: handleAmountChange()
-                }}
-            />
-            <Input 
-                label='Date'
-                textInputConfig={{
-                    placeholder: 'YYYY-MM-DD',
-                    maxLength: 10,
-                    onchange: () => {}
-                }}
-            />
+            <View style={styles.inputRow} >
+                <Input 
+                    label='Amount'
+                    textInputConfig={{
+                        keyboardType: 'decimal-pad',
+                        onchangeText: handleAmountChange()
+                    }}
+                />
+                <Input 
+                    label='Date'
+                    textInputConfig={{
+                        placeholder: 'YYYY-MM-DD',
+                        maxLength: 10,
+                        onchange: () => {}
+                    }}
+                />
+            </View>
             <Input 
                 label='Description'
                 textInputConfig={{
@@ -33,3 +35,10 @@ export default function ExpenseForm() {
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    inputRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    }
+})
