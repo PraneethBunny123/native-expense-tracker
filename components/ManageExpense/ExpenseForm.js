@@ -3,6 +3,7 @@ import Input from "./Input";
 import { useState } from "react";
 import Button from "../UI/Button";
 import getFormattedDate from "../../util/date";
+import { GlobalStyles } from "../../constants/styles";
 
 export default function ExpenseForm({handleCancelButton, submitButtonLabel, onSubmit, defaultValues}) {
     const [inputValues, setInputValues] = useState({
@@ -65,6 +66,7 @@ export default function ExpenseForm({handleCancelButton, submitButtonLabel, onSu
                 <Input 
                     style={styles.rowInput}
                     label='Amount'
+                    invalid={!inputValues.amount.isValid}
                     textInputConfig={{
                         keyboardType: 'decimal-pad',
                         onChangeText: handleInputChange.bind(this, 'amount'),
@@ -74,6 +76,7 @@ export default function ExpenseForm({handleCancelButton, submitButtonLabel, onSu
                 <Input 
                     style={styles.rowInput}
                     label='Date'
+                    invalid={!inputValues.date.isValid}
                     textInputConfig={{
                         placeholder: 'YYYY-MM-DD',
                         maxLength: 10,
@@ -84,13 +87,14 @@ export default function ExpenseForm({handleCancelButton, submitButtonLabel, onSu
             </View>
             <Input 
                 label='Description'
+                invalid={!inputValues.description.isValid}
                 textInputConfig={{
                     multiline: true,
                     onChangeText: (e) => handleInputChange('description', e),
                     value: inputValues.description.value
                 }}
             />
-            {formIsValid && <Text>Invalid input, Please check your input values!</Text>}
+            {formIsValid && <Text style={styles.errorText}>Invalid input, Please check your input values!</Text>}
             <View style={styles.buttons}>
                 <Button style={styles.button} mode='flat' onPress={handleCancelButton}>Cancel</Button>
                 <Button style={styles.button} onPress={handleFormSubmit}>{submitButtonLabel}</Button>
@@ -116,6 +120,11 @@ const styles = StyleSheet.create({
     },
     rowInput: {
         flex: 1
+    },
+    errorText: {
+        textAlign: 'center',
+        color: GlobalStyles.colors.error500,
+        margin: 8
     },
     buttons: {
         flexDirection: 'row',
