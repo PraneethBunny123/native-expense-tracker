@@ -24,7 +24,7 @@ export default function ExpenseForm() {
                     label='Amount'
                     textInputConfig={{
                         keyboardType: 'decimal-pad',
-                        onchangeText: (e) => handleInputChange('amount', e),
+                        onchangeText: handleInputChange.bind(this, 'amount'),
                         value: inputValues.amount
                     }}
                 />
@@ -34,7 +34,7 @@ export default function ExpenseForm() {
                     textInputConfig={{
                         placeholder: 'YYYY-MM-DD',
                         maxLength: 10,
-                        onchange: (e) => handleInputChange('date', e),
+                        onchangeText: (e) => handleInputChange('date', e),
                         value: inputValues.date
                     }}
                 />
