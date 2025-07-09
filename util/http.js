@@ -1,8 +1,16 @@
 import axios from "axios";
 
-export function storeFunction(expenseData) {
+const BACKEND_URL = 'https://native-expenses-30be3-default-rtdb.firebaseio.com/'
+
+export function postFunction(expenseData) {
     axios.post(
-        'https://native-expenses-30be3-default-rtdb.firebaseio.com/expenses.json',
+        BACKEND_URL + 'expenses.json',
         expenseData
+    )
+}
+
+export function getExpenses() {
+    axios.get(
+        BACKEND_URL + 'expenses.json'
     )
 }
