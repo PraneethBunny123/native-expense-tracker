@@ -4,7 +4,7 @@ import IconButton from "../components/UI/IconButton";
 import {GlobalStyles} from '../constants/styles'
 import { ExpensesContext } from "../store/expenses-context";
 import ExpenseForm from "../components/ManageExpense/ExpenseForm";
-import { postFunction } from "../util/http";
+import { postExpenses } from "../util/http";
 
 export default function ManageExpenses({route, navigation}) {
     const expenseId = route.params?.expenseId
@@ -33,7 +33,7 @@ export default function ManageExpenses({route, navigation}) {
         if(isEditing) {
             expensesCtx.updateExpense(expenseId, expenseData)
         } else {
-            postFunction(expenseData)
+            postExpenses(expenseData)
             expensesCtx.addExpense(expenseData)
         }
         navigation.goBack()
