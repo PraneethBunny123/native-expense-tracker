@@ -29,12 +29,12 @@ export default function ManageExpenses({route, navigation}) {
         navigation.goBack()
     }
 
-    function handleConfirmButton(expenseData) {
+    async function handleConfirmButton(expenseData) {
         if(isEditing) {
             expensesCtx.updateExpense(expenseId, expenseData)
         } else {
-            postExpenses(expenseData)
-            expensesCtx.addExpense(expenseData)
+            const id = await postExpenses(expenseData)
+            expensesCtx.addExpense({...expenseData, id: id})
         }
         navigation.goBack()
     }
