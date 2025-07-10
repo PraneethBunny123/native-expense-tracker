@@ -4,21 +4,36 @@ import { ExpensesContext } from "../store/expenses-context";
 import { getDateMinusDays } from "../util/date";
 import { getExpenses } from "../util/http";
 import Loading from "../components/UI/Loading";
+import Error from "../components/UI/Error";
 
 export default function RecentExpenses() {
     const [isFetching, setIsFetching] = useState(true)
+    const [error, setError] = useState()
     const expensesCtx = useContext(ExpensesContext)
 
     useEffect(() => {
         async function fetchExpenses() {
             setIsFetching(true)
-            const expenses = await getExpenses()
+            try {
+                const expenses = await getExpenses()
+                expensesCtx.setExpenses(expenses)
+            } catch(error) {
+                setError('Could not fetch expenses!')
+            }
+            
             setIsFetching(false)
-            expensesCtx.setExpenses(expenses)
+            
         }
-
         fetchExpenses()
     }, [])
+
+    function handleErrorOkay() {
+        setError(null)
+    }
+
+    if(error && !isFetching) {
+        <Error message={error} onPress={handleErrorOkay}/>
+    }
 
     const recentExpenses = expensesCtx.expenses.filter(expense => {
         const today = new Date()
