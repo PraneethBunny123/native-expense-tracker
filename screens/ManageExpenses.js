@@ -6,9 +6,12 @@ import { ExpensesContext } from "../store/expenses-context";
 import ExpenseForm from "../components/ManageExpense/ExpenseForm";
 import { deleteExpense, postExpenses, updatedExpense } from "../util/http";
 import Loading from "../components/UI/Loading";
+import Error from "../components/UI/Error";
 
 export default function ManageExpenses({route, navigation}) {
     const [isFetching, setIsFetching] = useState(false)
+    const [error, setError] = useState()
+
     const expenseId = route.params?.expenseId
     const isEditing = !!expenseId
 
@@ -24,9 +27,14 @@ export default function ManageExpenses({route, navigation}) {
     
     async function handleDeleteExpense() {
         setIsFetching(true)
-        expensesCtx.deleteExpense(expenseId)
-        await deleteExpense(expenseId)
-        navigation.goBack()
+        try {
+            expensesCtx.deleteExpense(expenseId)
+            await deleteExpense(expenseId)
+            navigation.goBack()
+        } catch(error) {
+            setError('Could not delete expense - please try again later')
+            setIsFetching(false)
+        }
     }
 
     function handleCancelButton() {
@@ -43,6 +51,14 @@ export default function ManageExpenses({route, navigation}) {
             expensesCtx.addExpense({...expenseData, id: id})
         }
         navigation.goBack()
+    }
+
+    function handleErrorOkay() {
+        setError(null)
+    }
+
+    if(error && !isFetching) {
+        return <Error message={error} onPress={handleErrorOkay} />
     }
 
     if(isFetching) {
