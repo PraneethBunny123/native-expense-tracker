@@ -2,12 +2,11 @@ import { StyleSheet, Text, View } from "react-native";
 import { GlobalStyles } from "../../constants/styles";
 import Button from "./Button";
 
-export default function Error({message, onPress}) {
+export default function Error({message}) {
     return (
         <View style={styles.container}>
             <Text style={[styles.text, styles.title]}>An error occured!</Text>
             <Text style={styles.text}>{message}</Text>
-            <Button onPress={onPress}>Okay</Button>
         </View>
     )
 }

@@ -27,12 +27,8 @@ export default function RecentExpenses() {
         fetchExpenses()
     }, [])
 
-    function handleErrorOkay() {
-        setError(null)
-    }
-
     if(error && !isFetching) {
-        <Error message={error} onPress={handleErrorOkay}/>
+        <Error message={error} />
     }
 
     const recentExpenses = expensesCtx.expenses.filter(expense => {

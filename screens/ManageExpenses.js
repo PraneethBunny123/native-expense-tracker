@@ -43,22 +43,23 @@ export default function ManageExpenses({route, navigation}) {
 
     async function handleConfirmButton(expenseData) {
         setIsFetching(true)
-        if(isEditing) {
-            expensesCtx.updateExpense(expenseId, expenseData)
-            await updatedExpense(expenseId, expenseData)
-        } else {
-            const id = await postExpenses(expenseData)
-            expensesCtx.addExpense({...expenseData, id: id})
+        try {
+            if(isEditing) {
+                expensesCtx.updateExpense(expenseId, expenseData)
+                await updatedExpense(expenseId, expenseData)
+            } else {
+                const id = await postExpenses(expenseData)
+                expensesCtx.addExpense({...expenseData, id: id})
+            }
+            navigation.goBack()
+        } catch(error) {
+            setError('Could not save data - please try again later')
+            setIsFetching(false)
         }
-        navigation.goBack()
-    }
-
-    function handleErrorOkay() {
-        setError(null)
     }
 
     if(error && !isFetching) {
-        return <Error message={error} onPress={handleErrorOkay} />
+        return <Error message={error} />
     }
 
     if(isFetching) {
